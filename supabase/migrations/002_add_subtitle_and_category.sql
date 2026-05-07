@@ -1,0 +1,3 @@
+ALTER TABLE map_uploads
+  ADD COLUMN IF NOT EXISTS subtitle      TEXT,
+  ADD COLUMN IF NOT EXISTS map_category  TEXT[] NOT NULL DEFAULT '{}';

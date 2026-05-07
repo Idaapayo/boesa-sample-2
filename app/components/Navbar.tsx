@@ -16,8 +16,9 @@ export default function Navbar() {
   const links = [
     { href: "#about", label: "About" },
     { href: "#themes", label: "Themes" },
-    { href: "#gallery", label: "Gallery" },
+    { href: "/gallery", label: "Gallery" },
     { href: "#authors", label: "Authors" },
+    { href: "/upload", label: "Upload" },
   ];
 
   return (
@@ -56,25 +57,43 @@ export default function Navbar() {
 
         {/* Desktop links */}
         <div style={{ display: "flex", alignItems: "center", gap: "2rem" }} className="nav-links">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              style={{
-                fontFamily: "var(--ff-heading)",
-                fontSize: "0.88rem",
-                fontWeight: 600,
-                color: "rgba(255,255,255,0.85)",
-                textDecoration: "none",
-                transition: "color 0.2s",
-                letterSpacing: "0.04em",
-              }}
-              onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "var(--gold-light)")}
-              onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "rgba(255,255,255,0.85)")}
-            >
-              {l.label}
-            </a>
-          ))}
+          {links.map((l) =>
+            l.href.startsWith("/") ? (
+              <Link
+                key={l.href}
+                href={l.href}
+                style={{
+                  fontFamily: "var(--ff-heading)",
+                  fontSize: "0.88rem",
+                  fontWeight: 600,
+                  color: "rgba(255,255,255,0.85)",
+                  textDecoration: "none",
+                  transition: "color 0.2s",
+                  letterSpacing: "0.04em",
+                }}
+              >
+                {l.label}
+              </Link>
+            ) : (
+              <a
+                key={l.href}
+                href={l.href}
+                style={{
+                  fontFamily: "var(--ff-heading)",
+                  fontSize: "0.88rem",
+                  fontWeight: 600,
+                  color: "rgba(255,255,255,0.85)",
+                  textDecoration: "none",
+                  transition: "color 0.2s",
+                  letterSpacing: "0.04em",
+                }}
+                onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "var(--gold-light)")}
+                onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "rgba(255,255,255,0.85)")}
+              >
+                {l.label}
+              </a>
+            )
+          )}
           <a href="#order" className="btn btn-gold" style={{ padding: "0.6rem 1.4rem", fontSize: "0.82rem" }}>
             Get the Book
           </a>
@@ -123,16 +142,27 @@ export default function Navbar() {
             gap: "1rem",
           }}
         >
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              style={{ color: "#fff", fontFamily: "var(--ff-heading)", fontWeight: 600, textDecoration: "none", fontSize: "1rem" }}
-            >
-              {l.label}
-            </a>
-          ))}
+          {links.map((l) =>
+            l.href.startsWith("/") ? (
+              <Link
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                style={{ color: "#fff", fontFamily: "var(--ff-heading)", fontWeight: 600, textDecoration: "none", fontSize: "1rem" }}
+              >
+                {l.label}
+              </Link>
+            ) : (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                style={{ color: "#fff", fontFamily: "var(--ff-heading)", fontWeight: 600, textDecoration: "none", fontSize: "1rem" }}
+              >
+                {l.label}
+              </a>
+            )
+          )}
           <a href="#order" className="btn btn-gold" style={{ alignSelf: "flex-start" }}>
             Get the Book
           </a>
